@@ -10,12 +10,14 @@ import org.springframework.web.server.ResponseStatusException;
 import java.util.ArrayList;
 import java.util.List;
 
+//@RequestMapping("api")
 @RestController
 public class Category_Controller {
     //field injection using autowired. (if not ew also can use constructor injection)
     @Autowired
     private CategoryService categoryService;
 
+    //RequestMapping(value = "/public/categories", method = RequestMethod.GET)
     @GetMapping("api/public/categories")
     public ResponseEntity <List <Category>> getAllCategoryList() {
 
