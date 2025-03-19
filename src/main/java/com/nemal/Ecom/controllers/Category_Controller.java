@@ -1,4 +1,4 @@
-package com.nemal.Ecom.controller;
+package com.nemal.Ecom.controllers;
 import com.nemal.Ecom.model.Category;
 import com.nemal.Ecom.service.CategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -7,8 +7,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
-import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 //@RequestMapping("api")
 @RestController
@@ -24,6 +24,15 @@ public class Category_Controller {
         List<Category> allCategoryList = categoryService.getAllCategoryList();
         return new ResponseEntity<>(allCategoryList, HttpStatus.OK);
     }
+
+
+    @GetMapping("api/public/categories/{categoryId}")
+    public ResponseEntity<Optional<Category>> getCategoryById(@PathVariable Long categoryId) {
+        Optional<Category> res = categoryService.readCategory(categoryId);
+        return new ResponseEntity<>(res,HttpStatus.OK);
+    }
+
+    //@GetMapping("api/admin/categories/{categoryName}")
 
     @PostMapping("api/admin/categories")
     public ResponseEntity <String> addCategory(@RequestBody Category category) {

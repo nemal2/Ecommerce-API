@@ -7,7 +7,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -31,6 +30,17 @@ public class CategoryServiceImpl implements CategoryService {
         //categoryList.add(category);
         categoryRepository.save(category);
     }
+
+    @Override
+    public Category readCategory(String categoryName) {
+        return categoryRepository.findByCategoryName(categoryName);
+    }
+
+    @Override
+    public Optional<Category> readCategory(Long categoryId) {
+        return categoryRepository.findById(categoryId);
+    }
+
 
     @Override
     public String deleteCategory(Long categoryId) {
